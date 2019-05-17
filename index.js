@@ -159,7 +159,7 @@ Cryptopia.prototype.privateRequest = function(method, params, callback) {
 	var md5 = crypto.createHash('md5').update( JSON.stringify( params ) ).digest();
 	var requestContentBase64String = md5.toString('base64');
 	var signature = this.key + "POST" + encodeURIComponent( this.baseURL + "/" + method).toLowerCase() + nonce + requestContentBase64String;
-	var hmac = crypto.createHmac('sha256', new Buffer( this.secret, "base64" ) ).update( signature ).digest().toString('base64');
+	var hmac = crypto.createHmac('sha256', new Buffer.from( this.secret, "base64" ) ).update( signature ).digest().toString('base64');
 	var options = {
 		host: this.host,
 		path: this.uri + method,
